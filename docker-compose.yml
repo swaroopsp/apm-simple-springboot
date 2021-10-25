@@ -1,0 +1,15 @@
+version: '3.5'
+
+services:
+
+  apm-simple-springboot:
+    container_name: apm-simple-springboot
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    volumes:
+      - /root/Dropbox/strategy-logs:/home/strategy-logs-folder
+    environment:
+      - "JVM_OPTIONS=-Delastic.apm.service_name=apm-simple-springboot-service -Delastic.apm.application_packages=com.swaroop -Delastic.apm.server_urls=http://apm-server:8200 -Dreactor.netty.http.server.accessLogEnabled=true"
+    ports:
+      - "8080:8080"
